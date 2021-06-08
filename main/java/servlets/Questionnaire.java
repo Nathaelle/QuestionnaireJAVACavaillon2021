@@ -34,6 +34,7 @@ public class Questionnaire extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setAttribute("questionnaire", getQuestionnaire());
 		
 		// Appelle la JSP et lui fait suivre les objets request et response :
 		this.getServletContext().getRequestDispatcher("/jsps/questionnaire.jsp").forward(request, response);

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="models.Question" %>
     
 <!DOCTYPE html>
 <html lang="fr">
@@ -12,6 +13,12 @@
     <link rel="stylesheet" href="css/questionnaire.css">
 </head>
 <body>
+
+	<% ArrayList<Question> questionnaire = (ArrayList<Question>) request.getAttribute("questionnaire"); %>
+
+	<% for(Question quest: questionnaire) { %>
+		<p><%= quest.getIntitule() %></p>
+	<% } %>
 
     <h1>Testez votre culture générale</h1>
     

@@ -3,6 +3,7 @@
     <!-- Import des classes nécessaires -->
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="models.Question" %>
+<%@ page import="models.Reponse" %>
     
     <!-- Template HTML -->
 <!DOCTYPE html>
@@ -47,14 +48,19 @@
 
     <form action="#" id="formulaire">
         <div id="questions">
-            <!-- Plan type d'une question -->
-            <div class="question">
-                <h2>Intitulé de la question</h2>
+        	
+        	<% for(Question quest: questionnaire) { %>
+        	
+        	<div class="question">
+                <h2><%= quest.getIntitule() %></h2>
+                
+                <% for(Reponse rep: quest.getReponses()) { %>
                 <div class="reponse">
                     <input type="radio" name="quest1" id="q1r1" value="rep1">
                     <label for="">Réponse 1</label>
                 </div>
-                <div class="reponse">
+                <% } %>
+                <!-- <div class="reponse">
                     <input type="radio" name="quest1" id="q1r2" value="rep2">
                     <label for="">Réponse 2</label>
                 </div>
@@ -65,8 +71,14 @@
                 <div class="reponse">
                     <input type="radio" name="quest1" id="q1r4" value="rep4">
                     <label for="">Réponse 4</label>
-                </div>
+                </div> -->
             </div>
+        	
+        	
+        	<% } %>
+        
+            <!-- Plan type d'une question -->
+            
             
         </div>
 

@@ -83,10 +83,10 @@ public class Questionnaire extends HttpServlet {
 		// Question 3
 				
 		ArrayList<Reponse> q3 = new ArrayList<>();
-		q2.add(new Reponse(9, "Etats-Unis", false));
-		q2.add(new Reponse(10, "Australie", false));
-		q2.add(new Reponse(11, "France", true));
-		q2.add(new Reponse(12, "Danemark", false));
+		q3.add(new Reponse(9, "Etats-Unis", false));
+		q3.add(new Reponse(10, "Australie", false));
+		q3.add(new Reponse(11, "France", true));
+		q3.add(new Reponse(12, "Danemark", false));
 						
 		Question quest3 = new Question(3, "Où se trouve la ville de Paris?", q3);
 						

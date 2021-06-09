@@ -80,9 +80,20 @@ public class Questionnaire extends HttpServlet {
 				
 		Question quest2 = new Question(2, "Quel animal hiberne?", q2);
 				
+		// Question 3
+				
+		ArrayList<Reponse> q3 = new ArrayList<>();
+		q2.add(new Reponse(9, "Etats-Unis", false));
+		q2.add(new Reponse(10, "Australie", false));
+		q2.add(new Reponse(11, "France", true));
+		q2.add(new Reponse(12, "Danemark", false));
+						
+		Question quest3 = new Question(3, "Où se trouve la ville de Paris?", q3);
+						
 
 		questionnaire.add(quest1);
 		questionnaire.add(quest2);
+		questionnaire.add(quest3);
 		
 		return questionnaire;
 	}

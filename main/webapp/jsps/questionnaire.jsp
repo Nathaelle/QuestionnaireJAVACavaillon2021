@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <!-- Import des classes nécessaires -->
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="models.Question" %>
     
+    <!-- Template HTML -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,13 +16,30 @@
 </head>
 <body>
 
+	<!-- On peux exécuter du code JAVA grâce aux balises suivantes,
+	!! Attention à ne pas oublier de terminer par un ; 
+	!! Il faut systématiquement "caster" les données -->
 	<% ArrayList<Question> questionnaire = (ArrayList<Question>) request.getAttribute("questionnaire"); %>
-
-	<% for(Question quest: questionnaire) { %>
-		<p><%= quest.getIntitule() %></p>
-	<% } %>
+	<!-- On transmet ici des données du contrôleur à la vue, 
+	par l'intermédiaire de l'objet request
+	Côté contrôleur (servlet) : request.setAttribute("key", "valeur")
+	Côté vue (jsp) : request.getAttribute("key") -->
 
     <h1>Testez votre culture générale</h1>
+    
+    <% boolean isConnected = true; %>
+    
+    <% if(isConnected) { %>
+    	<p>Vous êtes connecté !</p>
+    <% } %>
+    
+    <% String[] courses = {"Tomates", "Pain", "Lait", "Salade"}; %>
+    
+    <ul>
+    <% for(String str: courses) { %>
+    	<li><%= str %></li>
+    <% } %>
+    </ul>
     
     <div id="score">
         <p>Score : <span id="points">5</span>/<span id="total">5</span></p>

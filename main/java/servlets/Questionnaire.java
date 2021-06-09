@@ -44,7 +44,24 @@ public class Questionnaire extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		// reçoit les données du formulaire transmises via POST
+		ArrayList<Question> questionnaire = getQuestionnaire(); 
+		
+		// Calcul du score
+		int score = 0;
+		
+		for(Question q: questionnaire) {
+			// Je récupère la réponse pour chaque question avec le nom du paramètre (attribut name) : (Format de l'attribut name="quest1")
+			String param = request.getParameter("quest" + q.getNumero());
+			// J'isole le numéro de la réponse (Format de l'attribut value="rep1")
+			String numReponse = param.substring(3);
+			// Je transforme ce numero en int, et le stocke dans ma liste de numéros
+			if(q.verifReponse(Integer.parseInt(numReponse))) score++;
+		}
+		
+		request.setAttribute("score", score);
+		
 		doGet(request, response);
 	}
 	

@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/questionnaire.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -28,7 +28,7 @@
 
     <h1>Testez votre culture générale</h1>
     
-    <% boolean isConnected = true; %>
+    <%-- <% boolean isConnected = true; %>
     
     <% if(isConnected) { %>
     	<p>Vous êtes connecté !</p>
@@ -40,13 +40,18 @@
     <% for(String str: courses) { %>
     	<li><%= str %></li>
     <% } %>
-    </ul>
+    </ul> --%>
     
+    <% if(request.getAttribute("score") != null) { %>
+    <!-- Affichage du score (dans fenêtre modale) en fin de questionnaire -->
     <div id="score">
-        <p>Score : <span id="points">5</span>/<span id="total">5</span></p>
+        <p>Score : <span id="points"><%= request.getAttribute("score") %></span>/<span id="total"><%= questionnaire.size() %></span></p>
+        <button id="reload"><a href="questionnaire">Recommencer</a></button>
     </div>
+    <!-- Fin : Affichage du score en fin de questionnaire -->
+	<% } %>
 
-    <form action="#" id="formulaire">
+    <form action="questionnaire" method="POST" id="formulaire">
         <div id="questions">
         	
         	<% for(Question quest: questionnaire) { %>
@@ -59,7 +64,7 @@
                 <% for(Reponse rep: quest.getReponses()) { %>
                 <div class="reponse">
                 	<% int n = rep.getNumero(); %>
-                    <input type="radio" name="quest<%=n%>" id="q<%=q%>r<%=n%>" value="rep<%=n%>">
+                    <input type="radio" name="quest<%=q%>" id="q<%=q%>r<%=n%>" value="rep<%=n%>">
                     <label for="q<%=q%>r<%=n%>"><%= rep.getLibelle() %></label>
                 </div>
                 <% } %>

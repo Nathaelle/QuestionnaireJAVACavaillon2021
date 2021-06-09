@@ -39,4 +39,13 @@ public class Question {
 	public void setReponses(ArrayList<Reponse> reponses) {
 		this.reponses = reponses;
 	}
+	
+	public boolean verifReponse(int num) {
+		for(Reponse r: this.reponses) {
+			if (r.getNumero() == num) {
+				return r.isValeur();
+			}
+		}
+		return false;
+	}
 }

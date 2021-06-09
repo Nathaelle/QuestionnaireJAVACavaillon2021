@@ -54,32 +54,19 @@
         	<div class="question">
                 <h2><%= quest.getIntitule() %></h2>
                 
+                <% int q = quest.getNumero(); %>
+                
                 <% for(Reponse rep: quest.getReponses()) { %>
                 <div class="reponse">
-                    <input type="radio" name="quest1" id="q1r1" value="rep1">
-                    <label for="">Réponse 1</label>
+                	<% int n = rep.getNumero(); %>
+                    <input type="radio" name="quest<%=n%>" id="q<%=q%>r<%=n%>" value="rep<%=n%>">
+                    <label for="q<%=q%>r<%=n%>"><%= rep.getLibelle() %></label>
                 </div>
                 <% } %>
-                <!-- <div class="reponse">
-                    <input type="radio" name="quest1" id="q1r2" value="rep2">
-                    <label for="">Réponse 2</label>
-                </div>
-                <div class="reponse">
-                    <input type="radio" name="quest1" id="q1r3" value="rep3">
-                    <label for="">Réponse 3</label>
-                </div>
-                <div class="reponse">
-                    <input type="radio" name="quest1" id="q1r4" value="rep4">
-                    <label for="">Réponse 4</label>
-                </div> -->
             </div>
-        	
-        	
+        	      	
         	<% } %>
-        
-            <!-- Plan type d'une question -->
-            
-            
+                     
         </div>
 
         <div class="boutons">

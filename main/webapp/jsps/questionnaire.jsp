@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <!-- Import des classes nécessaires -->
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="models.Question" %>
@@ -17,61 +18,40 @@
 </head>
 <body>
 
-	<!-- On peux exécuter du code JAVA grâce aux balises suivantes,
-	!! Attention à ne pas oublier de terminer par un ; 
-	!! Il faut systématiquement "caster" les données -->
-	<% ArrayList<Question> questionnaire = (ArrayList<Question>) request.getAttribute("questionnaire"); %>
-	<!-- On transmet ici des données du contrôleur à la vue, 
-	par l'intermédiaire de l'objet request
-	Côté contrôleur (servlet) : request.setAttribute("key", "valeur")
-	Côté vue (jsp) : request.getAttribute("key") -->
-
     <h1>Testez votre culture générale</h1>
     
-    <%-- <% boolean isConnected = true; %>
-    
-    <% if(isConnected) { %>
-    	<p>Vous êtes connecté !</p>
-    <% } %>
-    
-    <% String[] courses = {"Tomates", "Pain", "Lait", "Salade"}; %>
-    
-    <ul>
-    <% for(String str: courses) { %>
-    	<li><%= str %></li>
-    <% } %>
-    </ul> --%>
-    
-    <% if(request.getAttribute("score") != null) { %>
+    <c:if test="${ score != null }">
     <!-- Affichage du score (dans fenêtre modale) en fin de questionnaire -->
     <div id="score">
-        <p>Score : <span id="points"><%= request.getAttribute("score") %></span>/<span id="total"><%= questionnaire.size() %></span></p>
+        <p>Score : <span id="points">${score}</span>/<span id="total">${ quest.size }</span></p>
         <button id="reload"><a href="questionnaire">Recommencer</a></button>
     </div>
     <!-- Fin : Affichage du score en fin de questionnaire -->
-	<% } %>
+	</c:if>
 
     <form action="questionnaire" method="POST" id="formulaire">
         <div id="questions">
         	
-        	<% for(Question quest: questionnaire) { %>
+        	<c:forEach var="quest" items="${ questionnaire }">
         	
         	<div class="question">
-                <h2><%= quest.getIntitule() %></h2>
+                <h2>${ quest.intitule }</h2>
                 
-                <% int q = quest.getNumero(); %>
+                <c:set var="q" value="${ quest.numero }"/>
                 
-                <% for(Reponse rep: quest.getReponses()) { %>
+                <c:forEach var="rep" items="${ quest.reponses }">
+                
                 <div class="reponse">
-                	<% int n = rep.getNumero(); %>
-                    <input type="radio" name="quest<%=q%>" id="q<%=q%>r<%=n%>" value="rep<%=n%>">
-                    <label for="q<%=q%>r<%=n%>"><%= rep.getLibelle() %></label>
+                	<c:set var="n" value="${ rep.numero }"/>
+                	
+                    <input type="radio" name="quest${q}" id="q${q}r${n}" value="rep${n}">
+                    <label for="q${q}r${n}">${ rep.libelle }</label>
                 </div>
-                <% } %>
+                
+                </c:forEach>
             </div>
-        	      	
-        	<% } %>
-                     
+            
+        	</c:forEach> 
         </div>
 
         <div class="boutons">
@@ -81,7 +61,6 @@
         
     </form>
 
-    
     <script src="js/questionnaire.js"></script>
 </body>
 </html>
